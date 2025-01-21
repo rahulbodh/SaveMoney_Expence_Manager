@@ -2,4 +2,39 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#04549B</color>
+    <color name="darkBlue">#052038</color>
+    <color name="lightSub">#82909C</color>
+    <color name="text_secondary">#436D92</color>
+    <color name="lightBlue">#C6CED6</color>
+    <color name="disableBlue">#E8EFF6</color>
+    <color name="Outline">#D2DAE0</color>
+    <color name="LinearBack">#8BB4D9</color>
+    <color name="BrightBlue">#1888EB</color>
+    <color name="BrightTurq">#3CDDD9</color>
+    <color name="Yellow">#FFD953</color>
+    <color name="BG">#DEF1FF</color>
+    <color name="BorderOutline">#689DC4</color>
+    <color name="btnNoClicked">#ABBECF</color>
+    <color name="textPlaceHolder">#AEB5B9</color>
+    <color name="dotnavfront">#061725</color>
+    <color name="dotnavback">#C8D0DD</color>
+    <color name="edit_tool_bg">#081723</color>
+    <color name="gray">#AEB6AB</color>
+    <color name="light_grey">#D6DAD5</color>
+    <color name="dark_grey">#7C8379</color>
+
+    // color for editor
+    <color name="blue_color_picker">#0066FF</color>
+    <color name="brown_color_picker">#AF593E</color>
+    <color name="green_color_picker">#01A368</color>
+    <color name="orange_color_picker">#FF861F</color>
+    <color name="red_color_picker">#ED0A3F</color>
+    <color name="red_orange_color_picker">#FF3F34</color>
+    <color name="sky_blue_color_picker">#76D7EA</color>
+    <color name="violet_color_picker">#8359A3</color>
+    <color name="yellow_color_picker">#FBE870</color>
+    <color name="yellow_green_color_picker">#C5E17A</color>
+    <color name="tool_bg">#151414</color>
+    <color name="semi_black_transparent">#99000000</color>
 </resources>

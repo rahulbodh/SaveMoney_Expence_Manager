@@ -1,6 +1,8 @@
 package com.example.expencemanagerapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,9 +10,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.expencemanagerapp.view.HomeFragment
 import com.example.expencemanagerapp.view.NotificationFragment
 import com.example.expencemanagerapp.view.ProfileFragment
+import com.example.expencemanagerapp.view.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeScreen : AppCompatActivity() {
+
+    private lateinit var search : ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,6 +27,9 @@ class HomeScreen : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+        initClicks()
 
         // Set default fragment
         supportFragmentManager.beginTransaction()
@@ -44,5 +52,9 @@ class HomeScreen : AppCompatActivity() {
                 true
             } ?: false
         }
+    }
+
+    private fun initClicks() {
+
     }
 }
