@@ -1,0 +1,4 @@
+package com.example.expencemanagerapp.view.adapter
+
+class SearchResultsAdapter {
+}
