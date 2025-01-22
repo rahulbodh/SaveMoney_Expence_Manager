@@ -1,3 +1,7 @@
+repositories {
+    mavenCentral()
+    maven{ url = uri("https://jitpack.io")}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+}
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -45,5 +49,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation(libs.circleimageview)
+    implemenation("com.github.PhilJay:MPAndroidChart:v3.0.3")
 }
