@@ -8,7 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.expencemanagerapp.R
+import com.example.expencemanagerapp.model.Transaction
+import com.example.expencemanagerapp.view.adapter.TransactionAdapter
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -19,6 +23,9 @@ class HomeFragment : Fragment() {
     private lateinit var search: ImageView
     private lateinit var userInfo :ImageView
     private lateinit var piChart : PieChart
+    private lateinit var recentTransactionAdapter: TransactionAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var transactionList : MutableList<Transaction>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +35,7 @@ class HomeFragment : Fragment() {
         search = view.findViewById(R.id.searchIcon)
         userInfo= view.findViewById(R.id.userInfo)
         piChart = view.findViewById(R.id.pieChart_view);
+        recyclerView = view.findViewById(R.id.RecentActivitiesRecyclerView)
 
         search.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
@@ -41,8 +49,30 @@ class HomeFragment : Fragment() {
 
         showPieChart()
 
+        transactionList = mutableListOf()
+        populateTransactionList()
+        recentTransactionAdapter  = TransactionAdapter(requireContext(), transactionList)
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = recentTransactionAdapter
+
         return view
     }
+
+    private fun populateTransactionList() {
+        // Add 10 sample transactions
+        transactionList.add(Transaction("Grocery", "Rs. 100", null, Transaction.TYPE_GET))
+        transactionList.add(Transaction("Electricity Bill", null, "Rs. 200", Transaction.TYPE_PAY))
+        transactionList.add(Transaction("Shopping", null, "Rs. 300", Transaction.TYPE_PAY))
+        transactionList.add(Transaction("Dining Out", "Rs. 300", null, Transaction.TYPE_GET))
+        transactionList.add(Transaction("Loan Payment", null, "Rs. 1000", Transaction.TYPE_PAY))
+        transactionList.add(Transaction("Freelance Work", "Rs. 2000", null, Transaction.TYPE_GET))
+        transactionList.add(Transaction("Car Maintenance", null, "Rs. 800", Transaction.TYPE_PAY))
+        transactionList.add(Transaction("Refund Received", "Rs. 150", null, Transaction.TYPE_GET))
+        transactionList.add(Transaction("Subscription Fee", null, "Rs. 400", Transaction.TYPE_PAY))
+        transactionList.add(Transaction("Part-Time Job", "Rs. 1200", null, Transaction.TYPE_GET))
+    }
+
 
     private fun showPieChart() {
         val pieEntries = ArrayList<PieEntry>()
