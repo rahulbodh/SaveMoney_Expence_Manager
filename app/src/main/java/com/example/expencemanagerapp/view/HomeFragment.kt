@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.model.Transaction
+import com.example.expencemanagerapp.view.adapter.TimePeriodAdapter
 import com.example.expencemanagerapp.view.adapter.TransactionAdapter
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -26,6 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var recentTransactionAdapter: TransactionAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var transactionList : MutableList<Transaction>
+    private lateinit var horizontalRecyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +39,7 @@ class HomeFragment : Fragment() {
         userInfo= view.findViewById(R.id.userInfo)
         piChart = view.findViewById(R.id.pieChart_view);
         recyclerView = view.findViewById(R.id.RecentActivitiesRecyclerView)
+        horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView)
 
         search.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
@@ -48,6 +52,16 @@ class HomeFragment : Fragment() {
         }
 
         showPieChart()
+        val timePeriods = listOf("This Month", "Last Month", "This Week", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
+        // Set up the adapter
+        val adapter = TimePeriodAdapter(requireContext(), timePeriods) { position, timePeriod ->
+            Toast.makeText(requireContext(), "Clicked: $timePeriod", Toast.LENGTH_SHORT).show()
+        }
+
+        // Set up RecyclerView
+        horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        horizontalRecyclerView.adapter = adapter
 
         transactionList = mutableListOf()
         populateTransactionList()
@@ -61,7 +75,6 @@ class HomeFragment : Fragment() {
 
     private fun populateTransactionList() {
         // Add 10 sample transactions
-        transactionList.add(Transaction("Grocery", "Rs. 100", null, Transaction.TYPE_GET))
         transactionList.add(Transaction("Electricity Bill", null, "Rs. 200", Transaction.TYPE_PAY))
         transactionList.add(Transaction("Shopping", null, "Rs. 300", Transaction.TYPE_PAY))
         transactionList.add(Transaction("Dining Out", "Rs. 300", null, Transaction.TYPE_GET))

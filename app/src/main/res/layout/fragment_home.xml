@@ -82,59 +82,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Horizontal Scroll View -->
-            <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/horizontalRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:layout_marginTop="16dp"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:orientation="horizontal"
+                />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tq1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/simple_text_border"
-                        android:gravity="center_vertical"
-                        android:text="This Month"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/tq2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/simple_text_border"
-                        android:gravity="center_vertical"
-                        android:text="Last Month"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/tq3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/simple_text_border"
-                        android:gravity="center_vertical"
-                        android:text="This week"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:id="@+id/tq4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/simple_text_border"
-                        android:gravity="center_vertical"
-                        android:text="January"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-            </HorizontalScrollView>
 
             <!-- Carousel Fragment Container -->
             <com.google.android.material.card.MaterialCardView
