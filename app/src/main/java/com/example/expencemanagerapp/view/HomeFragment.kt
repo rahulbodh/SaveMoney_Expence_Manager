@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expencemanagerapp.R
+import com.example.expencemanagerapp.databinding.FragmentHomeBinding
 import com.example.expencemanagerapp.model.Transaction
 import com.example.expencemanagerapp.view.adapter.TimePeriodAdapter
 import com.example.expencemanagerapp.view.adapter.TransactionAdapter
@@ -22,55 +23,51 @@ import com.github.mikephil.charting.data.PieEntry
 
 class HomeFragment : Fragment() {
 
-    private lateinit var search: ImageView
-    private lateinit var userInfo :ImageView
-    private lateinit var piChart : PieChart
+    private lateinit var binding: FragmentHomeBinding
+
     private lateinit var recentTransactionAdapter: TransactionAdapter
-    private lateinit var recyclerView: RecyclerView
     private lateinit var transactionList : MutableList<Transaction>
-    private lateinit var horizontalRecyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        search = view.findViewById(R.id.searchIcon)
-        userInfo= view.findViewById(R.id.userInfo)
-        piChart = view.findViewById(R.id.pieChart_view);
-        recyclerView = view.findViewById(R.id.RecentActivitiesRecyclerView)
-        horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView)
-
-        search.setOnClickListener {
-            val intent = Intent(activity, SearchActivity::class.java)
-            startActivity(intent)
-        }
-
-        userInfo.setOnClickListener {
-            val intent = Intent(activity, UserProfileActivity::class.java)
-            startActivity(intent)
-        }
-
+        initViews()
+        clickListeners()
         showPieChart()
+        return binding.root
+    }
+
+    private fun initViews() {
         val timePeriods = listOf("This Month", "Last Month", "This Week", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 
-        // Set up the adapter
         val adapter = TimePeriodAdapter(requireContext(), timePeriods) { position, timePeriod ->
             Toast.makeText(requireContext(), "Clicked: $timePeriod", Toast.LENGTH_SHORT).show()
         }
 
-        // Set up RecyclerView
-        horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        horizontalRecyclerView.adapter = adapter
+        binding.horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.horizontalRecyclerView.adapter = adapter
 
         transactionList = mutableListOf()
         populateTransactionList()
         recentTransactionAdapter  = TransactionAdapter(requireContext(), transactionList)
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = recentTransactionAdapter
+        binding.RecentActivitiesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.RecentActivitiesRecyclerView.adapter = recentTransactionAdapter
+    }
 
-        return view
+    private fun clickListeners() {
+
+        binding.searchIcon.setOnClickListener {
+            val intent = Intent(activity, SearchActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.userInfo.setOnClickListener {
+            val intent = Intent(activity, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun populateTransactionList() {
@@ -128,8 +125,8 @@ class HomeFragment : Fragment() {
         }
 
         // Setting the data to PieChart
-        piChart.data = pieData
-        piChart.invalidate() // Refreshing the chart
+        binding.pieChartView.data = pieData
+        binding.pieChartView.invalidate() // Refreshing the chart
     }
 
 }
