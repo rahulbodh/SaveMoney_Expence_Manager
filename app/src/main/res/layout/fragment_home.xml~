@@ -132,10 +132,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/leftBalanceLabel"
+                            android:id="@+id/totalBalanceLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Left Balance"
+                            android:text="Total Balance"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
@@ -144,7 +144,7 @@
                             android:id="@+id/totalBalanceValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rs. 7000"
+                            android:text="Rs. 15000"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="22sp" />
@@ -179,10 +179,10 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/totalBalanceLabel"
+                                android:id="@+id/usedBalanceLabel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total Balance"
+                                android:text="Used Balance"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -191,7 +191,7 @@
                                 android:id="@+id/usedBalanceValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rs. 15000"
+                                android:text="Rs. 5000"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -204,10 +204,10 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/usedBalanceLabel"
+                                android:id="@+id/leftBalanceLabel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="used Balance"
+                                android:text="Left Balance"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -216,7 +216,7 @@
                                 android:id="@+id/leftBalanceValue"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Rs. 8000"
+                                android:text="Rs. 10000"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
                         </LinearLayout>

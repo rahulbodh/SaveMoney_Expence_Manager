@@ -1,7 +1,6 @@
 package com.example.expencemanagerapp.view
 
 import android.os.Bundle
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -37,7 +36,7 @@ class HomeScreen : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             val fragment = when (item.itemId) {
                 R.id.item_1 -> HomeFragment()
-                R.id.item_2 -> ProfileFragment()
+                R.id.item_2 -> ActivitiesFragment()
                 R.id.item_3 -> NotificationFragment()
                 else -> null
             }
