@@ -26,8 +26,7 @@ class ActivitiesFragment : Fragment() {
         initClickListeners()
         return binding.root
     }
-
-    private fun initViews() {
+private fun initViews() {
         val timePeriods = listOf(
             "This Month", "Last Month", "This Week"
         )
