@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.databinding.FragmentActivitiesBinding
 import com.example.expencemanagerapp.view.adapter.TimePeriodAdapter
+import com.example.expencemanagerapp.view.placeholder.CategoriesFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ActivitiesFragment : Fragment() {
@@ -27,8 +28,12 @@ class ActivitiesFragment : Fragment() {
         return binding.root
     }
 private fun initViews() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_category_container, CategoriesFragment())
+            .commit()
+
         val timePeriods = listOf(
-            "This Month", "Last Month", "This Week"
+            "This Month", "Last Month", "This Week","Last Week","This year"
         )
 
         val adapter = TimePeriodAdapter(requireContext(), timePeriods) { position, timePeriod ->

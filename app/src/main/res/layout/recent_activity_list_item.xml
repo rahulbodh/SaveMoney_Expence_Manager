@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="24dp"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="16dp"
     android:padding="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true"
+    android:layout_marginBottom="8dp"
     android:layout_height="80dp">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:padding="8dp">
 
         <!-- Recent Activity TextView -->
         <TextView
@@ -28,6 +32,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:textSize="18sp" />
 
         <!-- Get Money TextView -->
@@ -40,11 +45,11 @@
             android:textColor="@color/red_color_picker"
             android:background="#1AFA0034"
             android:gravity="center"
-            android:padding="4dp"
+            android:padding="3dp"
             android:maxLines="1"
-            android:ellipsize="end"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:fontFamily="sans-serif"
+            android:textSize="14sp" />
 
         <!-- Paid Money TextView -->
         <TextView
@@ -56,13 +61,12 @@
             android:textColor="#4CAF50"
             android:background="#1A4CAF50"
             android:gravity="center"
-            android:padding="4dp"
+            android:padding="3dp"
             android:maxLines="1"
-            android:ellipsize="end"
             android:textStyle="bold"
-            android:textSize="16sp" />
+            android:fontFamily="sans-serif"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
-
+</com.google.android.material.card.MaterialCardView>
