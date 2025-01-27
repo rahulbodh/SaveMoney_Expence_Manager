@@ -1,4 +1,4 @@
-package com.example.expencemanagerapp.view.placeholder
+package com.example.expencemanagerapp.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.databinding.FragmentCategoriesBinding
 import com.example.expencemanagerapp.model.CategoryCardItem
 import com.example.expencemanagerapp.view.adapter.CategoryCardViewAdapter

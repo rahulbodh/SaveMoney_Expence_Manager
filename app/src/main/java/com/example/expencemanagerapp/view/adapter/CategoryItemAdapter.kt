@@ -1,13 +1,16 @@
 package com.example.expencemanagerapp.view.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.model.CategoryCardItem
+import com.example.expencemanagerapp.view.EntryCategoryDataActivity
 
 class CategoryCardViewAdapter(
     private val items: List<CategoryCardItem>
@@ -30,6 +33,11 @@ class CategoryCardViewAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recent_activity_list_item, parent, false)
+        view.setOnClickListener {
+            val intent = Intent(parent.context, EntryCategoryDataActivity::class.java)
+            startActivity(parent.context, intent, null)
+
+        }
         return CardViewHolder(view)
     }
 

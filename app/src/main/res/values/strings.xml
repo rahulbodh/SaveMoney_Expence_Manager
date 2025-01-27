@@ -8,4 +8,14 @@
     <string name="userimage">userImage</string>
     <string name="enter_category_name">Enter Category Name</string>
     <string name="enter_required_balance">Enter Required Balance</string>
+    <string name="edit">Edit</string>
+    <string name="content_description_search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="content_description_favorite">Favorite</string>
+    <string name="more">More</string>
+    <string name="content_description_more">description</string>
+    <string name="page_title">Grocery</string>
+    <string name="extended_fab_content_desc">Add entry</string>
+    <string name="extended_fab_label">Add entry</string>
+    <string name="add_category">Add Category</string>
 </resources>
