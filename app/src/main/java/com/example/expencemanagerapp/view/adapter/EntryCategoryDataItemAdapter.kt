@@ -1,0 +1,42 @@
+package com.example.expencemanagerapp.view.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.expencemanagerapp.R
+import com.example.expencemanagerapp.model.EntryCategoryData
+import org.w3c.dom.Text
+
+class EntryCategoryDataItemAdapter(
+    private val context: Context,
+    private val entryCategoryDataList: List<EntryCategoryData>
+) : RecyclerView.Adapter<EntryCategoryDataItemAdapter.EntryCategoryDataViewHolder>() {
+
+    inner class EntryCategoryDataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val date: TextView = itemView.findViewById(R.id.text_date)
+        val time: TextView = itemView.findViewById(R.id.text_time)
+        val leftMoney: TextView = itemView.findViewById(R.id.text_limit)
+        val usedMoney: TextView = itemView.findViewById(R.id.text_spent)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryCategoryDataViewHolder {
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.entry_category_data_item, parent, false)
+        return EntryCategoryDataViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return entryCategoryDataList.size
+    }
+
+    override fun onBindViewHolder(holder: EntryCategoryDataViewHolder, position: Int) {
+        val entryData = entryCategoryDataList[position]
+        holder.date.text = entryData.date
+        holder.time.text = entryData.time
+        holder.leftMoney.text = entryData.LeftMoney.toString()
+        holder.usedMoney.text = entryData.usedMoney.toString()
+    }
+}
