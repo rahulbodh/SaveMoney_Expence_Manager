@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.databinding.FragmentActivitiesBinding
+import com.example.expencemanagerapp.model.CategoryCardItem
+import com.example.expencemanagerapp.view.adapter.CategoryCardViewAdapter
 import com.example.expencemanagerapp.view.adapter.TimePeriodAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -25,13 +27,25 @@ class ActivitiesFragment : Fragment() {
         initClickListeners()
         return binding.root
     }
-private fun initViews() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_category_container, CategoriesFragment())
-            .commit()
+
+    private fun initViews() {
+        val sampleData = listOf(
+            CategoryCardItem("Grocery", 15000, 5000),
+            CategoryCardItem("Shopping", 12000, 7000),
+            CategoryCardItem("Entertainment", 20000, 15000),
+            CategoryCardItem("Utilities", 8000, 4000),
+            CategoryCardItem("Travel", 25000, 18000),
+            CategoryCardItem("Health", 10000, 5000),
+            CategoryCardItem("Education", 30000, 20000),
+            CategoryCardItem("Dining", 9000, 6000),
+            CategoryCardItem("Miscellaneous", 7000, 3000)
+        )
+
+        binding.categoryRecyclerView2.layoutManager = LinearLayoutManager(requireContext())
+        binding.categoryRecyclerView2.adapter = CategoryCardViewAdapter(sampleData)
 
         val timePeriods = listOf(
-            "This Month", "Last Month", "This Week","Last Week","This year"
+            "This Month", "Last Month", "This Week", "Last Week", "This year"
         )
 
         val adapter = TimePeriodAdapter(requireContext(), timePeriods) { position, timePeriod ->
