@@ -17,6 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ActivitiesFragment : Fragment() {
     private lateinit var binding: FragmentActivitiesBinding
+    private lateinit var categoryAdapter: CategoryCardViewAdapter
+    private val categoryList = mutableListOf<CategoryCardItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,26 +31,31 @@ class ActivitiesFragment : Fragment() {
     }
 
     private fun initViews() {
-        val sampleData = listOf(
-            CategoryCardItem("Grocery", 15000, 5000),
-            CategoryCardItem("Shopping", 12000, 7000),
-            CategoryCardItem("Entertainment", 20000, 15000),
-            CategoryCardItem("Utilities", 8000, 4000),
-            CategoryCardItem("Travel", 25000, 18000),
-            CategoryCardItem("Health", 10000, 5000),
-            CategoryCardItem("Education", 30000, 20000),
-            CategoryCardItem("Dining", 9000, 6000),
-            CategoryCardItem("Miscellaneous", 7000, 3000)
+        // Initialize the category list
+        categoryList.addAll(
+            listOf(
+                CategoryCardItem("Grocery", 15000, 5000),
+                CategoryCardItem("Shopping", 12000, 7000),
+                CategoryCardItem("Entertainment", 20000, 15000),
+                CategoryCardItem("Utilities", 8000, 4000),
+                CategoryCardItem("Travel", 25000, 18000),
+                CategoryCardItem("Health", 10000, 5000),
+                CategoryCardItem("Education", 30000, 20000),
+                CategoryCardItem("Dining", 9000, 6000),
+                CategoryCardItem("Miscellaneous", 7000, 3000)
+            )
         )
 
+        // Set up the RecyclerView with the adapter
+        categoryAdapter = CategoryCardViewAdapter(categoryList)
         binding.categoryRecyclerView2.layoutManager = LinearLayoutManager(requireContext())
-        binding.categoryRecyclerView2.adapter = CategoryCardViewAdapter(sampleData)
+        binding.categoryRecyclerView2.adapter = categoryAdapter
 
         val timePeriods = listOf(
             "This Month", "Last Month", "This Week", "Last Week", "This year"
         )
 
-        val adapter = TimePeriodAdapter(requireContext(), timePeriods) { position, timePeriod ->
+        val adapter = TimePeriodAdapter(requireContext(), timePeriods) { _, timePeriod ->
             Toast.makeText(requireContext(), "Clicked: $timePeriod", Toast.LENGTH_SHORT).show()
         }
 
@@ -64,10 +71,7 @@ class ActivitiesFragment : Fragment() {
     }
 
     private fun showDialogForAddCategory() {
-        // Inflate a custom layout for the dialog
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_add_category, null)
-
-        // Get references to the EditTexts in the custom layout
         val categoryNameEditText = dialogView.findViewById<EditText>(R.id.editTextCategoryName)
         val balanceEditText = dialogView.findViewById<EditText>(R.id.editTextBalance)
 
@@ -75,19 +79,35 @@ class ActivitiesFragment : Fragment() {
             .setTitle("Add Category")
             .setView(dialogView)
             .setNegativeButton("Cancel") { dialog, _ ->
-                dialog.dismiss() // Dismiss the dialog
+                dialog.dismiss()
             }
             .setPositiveButton("Add") { dialog, _ ->
                 val categoryName = categoryNameEditText.text.toString().trim()
                 val balance = balanceEditText.text.toString().trim()
 
                 if (categoryName.isNotEmpty() && balance.isNotEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Category: $categoryName, Balance: $balance",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    // Add logic to handle the new category and balance
+                    try {
+                        val balanceValue = balance.toInt()
+
+                        // Add new item to the list
+                        val newItem = CategoryCardItem(categoryName, balanceValue, 0)
+                        categoryList.add(newItem)
+
+                        // Notify adapter
+                        categoryAdapter.notifyItemInserted(categoryList.size - 1)
+
+                        Toast.makeText(
+                            requireContext(),
+                            "Category: $categoryName added successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(
+                            requireContext(),
+                            "Please enter a valid number for balance.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 } else {
                     Toast.makeText(
                         requireContext(),
