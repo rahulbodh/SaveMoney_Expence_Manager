@@ -1,13 +1,18 @@
 package com.example.expencemanagerapp.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.expencemanagerapp.R
 import com.example.expencemanagerapp.databinding.FragmentActivitiesBinding
 import com.example.expencemanagerapp.model.CategoryCardItem
@@ -19,6 +24,8 @@ class ActivitiesFragment : Fragment() {
     private lateinit var binding: FragmentActivitiesBinding
     private lateinit var categoryAdapter: CategoryCardViewAdapter
     private val categoryList = mutableListOf<CategoryCardItem>()
+    private var isScrolling = false
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +69,43 @@ class ActivitiesFragment : Fragment() {
         binding.horizontalRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalRecyclerView.adapter = adapter
+
+        var isScrollingFast = false
+        var isScrolling = false
+        var lastScrollY = 0
+        var shrinkRunnable = Runnable {
+            binding.fab.animate().scaleX(1f).scaleY(1f).alpha(1f)
+                .setInterpolator(DecelerateInterpolator())
+                .setDuration(200).start()
+        }
+
+        binding.categoryRecyclerView2.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val currentScrollY = recyclerView.computeVerticalScrollOffset()
+                val scrollSpeed = Math.abs(currentScrollY - lastScrollY)
+
+                isScrollingFast = scrollSpeed > 20
+                isScrolling = dy != 0
+                lastScrollY = currentScrollY
+
+                if (isScrollingFast) {
+                    binding.fab.animate().alpha(0f).setDuration(150).start() // Hide FAB when scrolling fast
+                } else if (isScrolling) {
+                    binding.fab.animate().scaleX(0.8f).scaleY(0.8f).alpha(1f)
+                        .setInterpolator(AccelerateInterpolator()).setDuration(150).start() // Shrink FAB
+                }
+
+                handler.removeCallbacks(shrinkRunnable)
+                }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    isScrollingFast = false
+                    isScrolling = false
+                    handler.postDelayed(shrinkRunnable, 200)
+                }
+            }
+        })
     }
 
     private fun initClickListeners() {
