@@ -33,6 +33,18 @@ class EntryCategoryDataActivity : AppCompatActivity() {
             insets
         }
 
+        initViews()
+        initClicks()
+
+    }
+
+    private fun initClicks() {
+        binding.topAppBar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun initViews() {
         var isScrollingFast = false
         var isScrolling = false
         var lastScrollY = 0
@@ -42,7 +54,7 @@ class EntryCategoryDataActivity : AppCompatActivity() {
                 .setDuration(200).start()
         }
 
-         val sampleData = listOf(
+        val sampleData = listOf(
             EntryCategoryData("Jan 27, 2025", "10:00 AM", 1000, 200), // Item 1
             EntryCategoryData("Jan 27, 2025", "12:00 PM", 800, 300),  // Item 2
             EntryCategoryData("Jan 27, 2025", "03:00 PM", 500, 100),  // Item 3
@@ -83,7 +95,6 @@ class EntryCategoryDataActivity : AppCompatActivity() {
                 }
             }
         })
-
 
     }
 }

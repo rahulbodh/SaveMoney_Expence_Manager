@@ -68,6 +68,11 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, UserProfileActivity::class.java)
             startActivity(intent)
         }
+
+        binding.showallActivity.setOnClickListener{
+            val intent = Intent(activity, RecentTransactionActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun populateTransactionList() {

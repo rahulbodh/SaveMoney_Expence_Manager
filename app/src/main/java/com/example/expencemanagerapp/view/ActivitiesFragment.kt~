@@ -112,9 +112,6 @@ class ActivitiesFragment : Fragment() {
         binding.fab.setOnClickListener {
             showDialogForAddCategory()
         }
-        binding.topAppBar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
-        }
     }
 
     private fun showDialogForAddCategory() {
