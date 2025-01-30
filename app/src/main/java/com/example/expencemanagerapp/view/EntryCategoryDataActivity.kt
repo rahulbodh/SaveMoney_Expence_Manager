@@ -1,5 +1,6 @@
 package com.example.expencemanagerapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -41,6 +42,11 @@ class EntryCategoryDataActivity : AppCompatActivity() {
     private fun initClicks() {
         binding.topAppBar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.extendedFab.setOnClickListener {
+            val intent = Intent(this, AddTransactionToCategoryActivity::class.java)
+            startActivity(intent)
         }
     }
 
