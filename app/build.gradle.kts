@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -52,5 +53,16 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.circleimageview)
     implementation(libs.mpandroidchart)
+
+    // adding dependency for room db
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+    // ViewModel
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    // LiveData
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+    // Annotation processor
+    annotationProcessor (libs.androidx.lifecycle.compiler)
 
 }
