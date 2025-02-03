@@ -65,4 +65,7 @@ dependencies {
     // Annotation processor
     annotationProcessor (libs.androidx.lifecycle.compiler)
 
+    // biometric authentication
+    implementation(libs.androidx.biometric.ktx)
+
 }

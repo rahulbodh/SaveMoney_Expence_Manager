@@ -18,6 +18,7 @@ class UserProfileActivity : AppCompatActivity() {
     private val options = listOf(
         Pair("Recent Activities", R.drawable.baseline_account_circle_24),
         Pair("Refer", R.drawable.baseline_account_circle_24),
+        Pair("Privacy & Security", R.drawable.baseline_account_circle_24),
         Pair("Help & Support", R.drawable.baseline_account_circle_24),
         Pair("Logout", R.drawable.baseline_account_circle_24)
     )
@@ -43,6 +44,10 @@ class UserProfileActivity : AppCompatActivity() {
                 "Recent Activities" -> {
                     // Handle Recent Activities
                     val intent = Intent(this, RecentTransactionActivity::class.java)
+                    startActivity(intent)
+                }
+                "Privacy & Security" -> {
+                    val intent = Intent(this, PrivacyAndSecurityActivity::class.java)
                     startActivity(intent)
                 }
                 "Refer" -> {
