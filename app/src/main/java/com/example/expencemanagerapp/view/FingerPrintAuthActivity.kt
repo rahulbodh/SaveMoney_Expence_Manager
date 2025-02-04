@@ -33,42 +33,63 @@ class FingerPrintAuthActivity : AppCompatActivity() {
 
         biometricManager = BiometricManager.from(this)
 
-        when (biometricManager.canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL)){
-            BiometricManager.BIOMETRIC_SUCCESS ->
-                Toast.makeText(this , "Biometric authentication is available" , Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
-                Toast.makeText(this , "Biometric authentication is not available on this device" , Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
-                Toast.makeText(this , "Biometric authentication is not available on this device" , Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
-                Toast.makeText(this , "No fingerprint enrolled" , Toast.LENGTH_SHORT).show()
-        }
-        executor  = ContextCompat.getMainExecutor(this)
-        biometricPrompt = BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                super.onAuthenticationError(errorCode, errString)
+        binding.unlock.setOnClickListener {
+
+            when (biometricManager.canAuthenticate(BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
+                BiometricManager.BIOMETRIC_SUCCESS ->
+                    Toast.makeText(
+                        this,
+                        "Biometric authentication is available",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
+                    Toast.makeText(
+                        this,
+                        "Biometric authentication is not available on this device",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
+                    Toast.makeText(
+                        this,
+                        "Biometric authentication is not available on this device",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
+                    Toast.makeText(this, "No fingerprint enrolled", Toast.LENGTH_SHORT).show()
+            }
+            executor = ContextCompat.getMainExecutor(this)
+            biometricPrompt =
+                BiometricPrompt(this, executor, object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                        super.onAuthenticationError(errorCode, errString)
 //                Toast.makeText(applicationContext, "Authentication error: $errString", Toast.LENGTH_SHORT).show()
-            }
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                super.onAuthenticationSucceeded(result)
+                    }
+
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
 //                Toast.makeText(applicationContext, "Authentication succeeded!", Toast.LENGTH_SHORT).show()
-               val Intent = Intent(this@FingerPrintAuthActivity, HomeScreen::class.java)
-                startActivity(Intent)
-            }
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                Toast.makeText(applicationContext, "Try Again", Toast.LENGTH_SHORT).show()
-            }
-        })
-        // Set up the BiometricPrompt info
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for Expense Manager")
-            .setSubtitle("Login with your fingerprint")
-            .setNegativeButtonText("Use Password")
-            .setConfirmationRequired(true) // If true, the user needs to confirm after biometric
-            .build()
-        biometricPrompt.authenticate(promptInfo)
+                        val Intent = Intent(this@FingerPrintAuthActivity, HomeScreen::class.java)
+                        startActivity(Intent)
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        Toast.makeText(applicationContext, "Try Again", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            // Set up the BiometricPrompt info
+            promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for Expense Manager")
+                .setSubtitle("Login with your fingerprint")
+                .setNegativeButtonText("Use Password")
+                .setConfirmationRequired(true) // If true, the user needs to confirm after biometric
+                .build()
+            biometricPrompt.authenticate(promptInfo)
 
 
+        }
     }
 }
