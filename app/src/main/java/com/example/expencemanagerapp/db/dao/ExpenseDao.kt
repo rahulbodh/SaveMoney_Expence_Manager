@@ -27,9 +27,9 @@ interface ExpenseDao {
     fun getExpensesByDateRange(startTime : String , endTime: String) : Flow<List<Expense>>
 
     @Query("SELECT * FROM expenses WHERE categoryId =:categoryId")
-    fun getExpensesByCategory(categoryId : String) : Flow<List<Expense>>
+    fun getExpensesByCategory(categoryId : Int) : Flow<List<Expense>>
 
     @Query("SELECT * FROM expenses WHERE categoryId =:categoryId And time BETWEEN :startTime AND :endTime")
-    fun getTotalExpenseForCategory(categoryId: String , startTime : String , endTime : String) : Flow<List<Expense>>
+    fun getTotalExpenseForCategory(categoryId: Int , startTime : String , endTime : String) : Flow<List<Expense>>
 
 }
