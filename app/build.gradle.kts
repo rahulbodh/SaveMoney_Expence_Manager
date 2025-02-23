@@ -55,7 +55,9 @@ dependencies {
     implementation(libs.mpandroidchart)
 
     // adding dependency for room db
-    implementation(libs.androidx.room.runtime)
+    implementation ("androidx.room:room-ktx:2.6.1")
+
+
     ksp(libs.androidx.room.compiler)
 
     // ViewModel
