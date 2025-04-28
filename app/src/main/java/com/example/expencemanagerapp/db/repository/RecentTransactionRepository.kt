@@ -5,6 +5,8 @@ import com.example.expencemanagerapp.db.entity.RecentTransaction
 
 class RecentTransactionRepository (private val recentTransactionDao : RecentTransactionDao) {
 
+    fun getAllRecentTransaction() = recentTransactionDao.getAllTransaction()
+
     suspend fun insertRecentTransaction(recentTransaction: RecentTransaction) = recentTransactionDao.insertTransaction(recentTransaction)
 
     suspend fun updateTransaction(recentTransaction: RecentTransaction) = recentTransactionDao.updateTransaction(recentTransaction)
